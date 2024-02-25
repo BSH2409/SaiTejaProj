@@ -9,6 +9,7 @@ function App() {
   const [dataById, setDataById] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
+  const operatingLoadById = {};
 
   useEffect(() => {
     fetchData();
@@ -28,11 +29,11 @@ function App() {
     try {
       const response = await axios.get('http://localhost:5000/api/fetch-data');
       const parsedDataById = response.data.reduce((acc, item) => {
-        const { deviceid, fromts, tots, metrics } = item;
+        const { deviceid, fromts, tots, metrics, operatingLoad} = item;
         if (!acc[deviceid]) {
           acc[deviceid] = [];
         }
-        acc[deviceid].push({ deviceid, fromts, tots, metrics: parseMetrics(metrics) });
+        acc[deviceid].push({ deviceid, fromts, tots, metrics: metrics, operatingLoad: operatingLoad });
         return acc;
       }, {});
       setDataById(parsedDataById);
@@ -49,11 +50,12 @@ function App() {
   return (
     <div className="App">
       <h1>Machine State App</h1>
-      {currentItems.map((deviceId) => <div key={deviceId}>{deviceId}
+      {currentItems.map((deviceId) => <div key={deviceId}>
+        {deviceId}
         <ShowDevideData 
           deviceId={deviceId} 
           data={dataById[deviceId]}
-          operating_load={200}
+          operating_load={dataById[deviceId][0] && dataById[deviceId][0].operatingLoad}
         /></div>)}
       <Pagination
         itemsPerPage={itemsPerPage}

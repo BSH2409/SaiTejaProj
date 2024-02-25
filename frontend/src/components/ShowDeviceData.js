@@ -27,6 +27,7 @@ const ShowDeviceData = ({ data , operating_load}) => {
     }
   }
   const renderChart = () => {
+    console.log(data)
     console.log('Rendering chart with data:', data); // Debug: Check data
     if (canvasRef.current) {
       console.log('Canvas ref:', canvasRef.current); // Debug: Verify canvas reference
