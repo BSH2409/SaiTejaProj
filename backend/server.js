@@ -52,8 +52,8 @@ app.listen(PORT, () => {
 
 function getPreviousDayTimestamp() {
   const date = new Date();
-  date.setDate(date.getDate() - 1); // Set to previous day
-  return date.getTime(); // Get timestamp in milliseconds
+  date.setDate(date.getDate() - 1);
+  return date.getTime();
 }
 
 function isSameDay(timestamp1, timestamp2) {
