@@ -23,6 +23,7 @@ app.get('/api/fetch-data', (req, res) => {
       console.error('Error reading CSV file:', error);
       res.status(500).json({ error: 'Internal server error' });
     });
+    data.sort((a, b) => parseFloat(a.tots) - parseFloat(b.tots));
 });
 
 app.listen(PORT, () => {

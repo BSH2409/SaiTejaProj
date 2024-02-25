@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css'; // Import CSS for styling
-import LineChart from './components/LineChart';
+import ShowDevideData from './components/ShowDeviceData';
 
 
 
@@ -49,7 +49,12 @@ function App() {
   return (
     <div className="App">
       <h1>Machine State App</h1>
-      {currentItems.map((deviceId) => <div key={deviceId}><LineChart deviceId={deviceId} data={dataById[deviceId]}/></div>)}
+      {currentItems.map((deviceId) => <div key={deviceId}>{deviceId}
+        <ShowDevideData 
+          deviceId={deviceId} 
+          data={dataById[deviceId]}
+          operating_load={200}
+        /></div>)}
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={Object.keys(dataById).flat().length}
